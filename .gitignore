@@ -1,0 +1,4 @@
+# Compiled elisp files
+*.elc
+# Emacs backup files
+*~
