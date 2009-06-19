@@ -1,6 +1,6 @@
 ;;; selftest.el --- Personal unit tests
 
-;; Copyright (C) 2007  Edward O'Connor
+;; Copyright (C) 2007, 2008, 2009  Edward O'Connor
 
 ;; Author: Edward O'Connor <hober0@gmail.com>
 ;; Keywords: convenience
@@ -43,8 +43,12 @@
 ;; 2007-09-14: Added automatic Twitter posting.
 ;;             Uses (a patched version of) twit.el, which see.
 ;; 2008-01-08: Added ability to filter when each test should be taken.
+;; 2009-06-19: Use `read-char-spec' for `selftest-ask' UI.
 
 ;;; Code:
+
+;; Latest version at http://edward.oconnor.cx/elisp/read-char-spec.el
+(require 'read-char-spec)
 
 (defvar selftest-tests '())
 
@@ -54,16 +58,11 @@ Requires twit.el, which is available on the EmacsWiki.")
 
 (defun selftest-ask (prompt)
   "Like `y-or-n-p', but asks (with PROMPT) for pass, fail, or skip."
-  (setq prompt (format "%s (pass, fail, or skip)? " prompt))
-  (let* ((answers '(("pass" . :pass) ("fail" . :fail) ("skip" . :skip)
-                    ("p" . :pass) ("f" . :fail) ("s" . :skip)
-                    ("y" . :pass) ("n" . :fail)))
-         (answer ""))
-    (while (string-equal answer "")
-      (setq answer (completing-read prompt answers nil t)))
-    ;; "And just in case my point you have missed
-    ;; Somehow I preferred (CDR (ASSQ KEY A-LIST))"
-    (cdr (assoc answer answers))))
+  (read-char-spec prompt '((?p :pass "You passed this test")
+                           (?f :fail "You failed this test")
+                           (?y :pass "You passed this test")
+                           (?n :fail "You failed this test")
+                           (?s :skip "You're skipping this test"))))
 
 (defmacro define-selftest (slug question &rest params)
   "Defines a new personal unit test named SLUG.

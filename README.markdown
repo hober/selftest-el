@@ -2,9 +2,6 @@ This is a simple library for managing your personal unit tests. If
 you're unfamiliar with the concept, please read [this blog post][].
 [Michal Wallace][] came up with the idea. Here's how he describes them:
 
-   [this blog post]: http://withoutane.com/rants/2007/08/personal-unit-tests
-   [Michal Wallace]: http://withoutane.com/
-
 > The way I see it, there are certain things I ought to be doing to be
 > productive and effective no matter what my goals are. These are things
 > that are relatively easy to set up, but take discipline and awareness
@@ -23,3 +20,9 @@ Here's an example use of `selftest.el`:
       :when 'always)
 
 The command `selftest-run` may be used to run all of your tests.
+
+This library relies on [read-char-spec.el][].
+
+[Michal Wallace]: http://withoutane.com/
+[read-char-spec.el]: http://edward.oconnor.cx/elisp/read-char-spec.el
+[this blog post]: http://withoutane.com/rants/2007/08/personal-unit-tests
