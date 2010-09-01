@@ -48,7 +48,7 @@
 ;;; Code:
 
 ;; Latest version at http://edward.oconnor.cx/elisp/read-char-spec.el
-(require 'read-char-spec)
+(autoload 'read-char-spec "read-char-spec")
 
 (defvar selftest-tests '())
 
