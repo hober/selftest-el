@@ -5,7 +5,6 @@ EMACS=emacs -q --no-site-file
 ELS = $(shell ls -1 *.el)
 ELCS = $(ELS:.el=.elc)
 all: $(ELCS)
-	make $(ELCS)
 
 .el.elc:
 	$(EMACS) -batch -L . \
